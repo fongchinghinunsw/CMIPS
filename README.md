@@ -447,3 +447,9 @@ and that any spare space in the buffer will be filled with zero bytes.
 Print Character should print the lowest 8 bits of <code>$a0</code>.
     
 </body>
+
+## Build Instruction
+```
+make
+```
+This will install the shell as `mips`, run it by `./mips <option>`.
