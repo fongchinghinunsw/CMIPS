@@ -1,14 +1,6 @@
 # CMIPS
 [![CMIPS](https://img.shields.io/badge/GitHub-CMIPS-blue)](https://github.com/fongchinghinunsw/CMIPS)
-
-<p>
-The first part of the assignment is
-to implement the function <code>print_instruction</code>
-in <code>print_instruction.c</code>.
-<code>print_instruction</code> is given
-a MIPS instruction as a 32-bit unsigned integer value,
-You need to add code to <code>print_instruction</code>
-which prints out the assembler for the instruction.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 <div class="highlight"><pre><span></span><span class="c1">// If you use C library functions add includes here.</span>
