@@ -452,4 +452,8 @@ Print Character should print the lowest 8 bits of <code>$a0</code>.
 ```
 make
 ```
-This will install the shell as `mips`, run it by `./mips <option>`.
+This will install the emulator as `mips`, run it by `./mips <option>`.
+
+
+## License
+This project is open-sourced under MIT License, see the [license file](LICENSE) for details.
