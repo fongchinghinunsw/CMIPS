@@ -183,39 +183,8 @@ mips > <kbd>D</kbd>
 [10010008] 0000002A
 </pre>
 
-<p>
-The assembly files you have been given
-will help you debug and test your <em>execution_instruction</em>.
-In addition, autotests are available
-to help with your testing:
-
-<pre is="tty">
-<kbd is="sh">1521 autotest mips part2</kbd>
-...
-</pre>
-
-<p>
-As before,
-if you create extra <code>.c</code> or <code>.h</code> files,
-you will need to supply them explicitly to autotest; for example:
-
-<pre is="tty">
-<kbd is="sh">1521 autotest mips part2 extra1.c extra2.c extra3.h</kbd>
-...
-</pre>
-
-
 <h2>MIPS Architecture</h2>
-<p>
-You only need to implement the following subset of
-instructions and system calls;
-<strong>mips</strong> will only be tested on these.
-
 <h3>MIPS Instructions</h3>
-<p>
-You need to implement only this subset of MIPS instructions:
-
-
 
 <table class="table table-sm table-striped">
 <thead>
@@ -419,10 +388,6 @@ except for instruction that directly change the program counter,
 such as branches or jumps.
 
 <h3>System Calls</h3>
-<p>
-You only need to implement this subset of system calls.
-
-
 
 <table class="table table-sm table-striped">
 <thead>
@@ -481,31 +446,5 @@ and that any spare space in the buffer will be filled with zero bytes.
 
 <p>
 Print Character should print the lowest 8 bits of <code>$a0</code>.
-<p>
-You do not have to implement error handling for syscalls.  You can assume a valid syscall number is supplied.
-You can assume valid arguments are supplied.
-You can assume any I/O (scanf, fgetc, fputc, fgets, printf) succeeds.
-
-
-<h2>Assumptions and Clarifications</h2>
-
-<p>
-Like all good programmers,
-you should make as few assumptions as possible.
-
-<p>
-You can assume that
-your functions are given only valid instructions
-as listed in the table above,
-and that memory accesses are valid.
-
-<p>
-You do not have to implement
-MIPS instructions, system calls, or features
-which are not explicitly mentioned in the tables above.
-In particular,
-you do not have to implement or consider
-delay slots or traps,
-which are beyond the scope of this assignment
-
+    
 </body>
