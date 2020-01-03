@@ -3,34 +3,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-<div class="highlight"><pre><span></span><span class="c1">// If you use C library functions add includes here.</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;emu.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;ram.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;registers.h&quot;</span><span class="cp"></span>
-
-<span class="cm">/*</span>
-<span class="cm"> * print a MIPS instruction (no newline)</span>
-<span class="cm"> * run reference implementation if unsure what to print</span>
-<span class="cm"> */</span>
-<span class="kt">void</span> <span class="nf">print_instruction</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">instruction</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;add $3, $7, $5&quot;</span><span class="p">);</span> <span class="c1">// REPLACE ME WITH YOUR CODE</span>
-<span class="p">}</span>
-
-<span class="c1">// PUT YOUR FUNCTIONS HERE</span>
-</pre></div>
-
-
-<p>
-For example, <code>print_instruction(0x00851820)</code> should print <code>add $3, $4, $5</code>.
-
 <p>
 Tables below describe how MIPS instructions are encoded.
-There is also a reference implementation which you can use
-if you are unclear what string should be printed for an instruction.
 
 <p>
-<strong>emu</strong> takes several command-line arguments.
+<strong>CMIPS</strong> takes several command-line arguments.
 The <code>-p</code> option indicates the rest of the command is
 hexadecimal integers describing instructions
 that <em>print_instruction</em> will be called on —
@@ -38,18 +15,10 @@ for example:
 
 <pre is="tty">
 <kbd is="sh">make</kbd>
-dcc     emu.c ram.c registers.c execute_instruction.c print_instruction.c   -o emu
-<kbd is="sh">./emu -p 0x00851820</kbd>
+gcc     mips.c ram.c registers.c execute_instruction.c print_instruction.c   -o emu
+<kbd is="sh">./mips -p 0x00851820</kbd>
 [00400024] 00851820 add $3, $4, $5
 </pre>
-
-<p>
-The code you have been given prints
-<code>[00400024] 00851820 </code>:
-the first part is the address this instruction would be placed,
-and the second part is the number passed.
-Your code only needs to print <code>add $3, $4, $5</code>,
-the instruction that value encodes.
 
 <p>
 <code>emu -p</code> will also accept assembler statements,
