@@ -15,19 +15,19 @@ for example:
 
 <pre is="tty">
 <kbd is="sh">make</kbd>
-gcc     mips.c ram.c registers.c execute_instruction.c print_instruction.c   -o emu
+gcc     mips.c ram.c registers.c execute_instruction.c print_instruction.c helper.c   -o mips
 <kbd is="sh">./mips -p 0x00851820</kbd>
 [00400024] 00851820 add $3, $4, $5
 </pre>
 
 <p>
-<code>emu -p</code> will also accept assembler statements,
+<code>mips -p</code> will also accept assembler statements,
 each of which it will convert to integers,
 and <em>print_instruction</em> will be called on that result.
 For example:
 
 <pre is="tty">
-<kbd is="sh">./emu -p 'add $3, $4, $5'</kbd>
+<kbd is="sh">./mips -p 'add $3, $4, $5'</kbd>
 [00400024] 00851820 add $3, $4, $5
 </pre>
 
@@ -37,13 +37,13 @@ This is needed because the <code>$</code> character
 has a special meaning to the shell.
 
 <p>
-<strong>emu</strong> also has a <code>-P</code> option,
+<strong>mips</strong> also has a <code>-P</code> option,
 which takes a file of assembler statements,
 converts them to integers,
 and calls <em>print_instruction</em> for each integer, for example:
 
 <pre is="tty">
-<kbd is="sh">./emu -P print10.s</kbd>
+<kbd is="sh">./mips -P print10.s</kbd>
 [00400024] 34080001 ori $8, $0, 1
 [00400028] 2901000B slti $1, $8, 11
 [0040002C] 10200009 beq $1, $0, 9
@@ -63,7 +63,7 @@ If you are uncertain what output is correct,
 run the reference implementation on a CSE machine:
 
 <pre is="tty">
-<kbd is="sh">1521 emu -p 0x03E00008</kbd>
+<kbd is="sh">1521 mips -p 0x03E00008</kbd>
 [00400024] 03E00008 jr $31
 </pre>
 
@@ -86,7 +86,7 @@ In addition, autotests are available
 to help with your testing:
 
 <pre is="tty">
-<kbd is="sh">1521 autotest emu part1</kbd>
+<kbd is="sh">1521 autotest mips part1</kbd>
 ...
 </pre>
 
@@ -95,7 +95,7 @@ If you create extra <code>.c</code> or <code>.h</code> files,
 you will need to supply them explicitly to autotest; for example:
 
 <pre is="tty">
-<kbd is="sh">1521 autotest emu part1 extra1.c extra2.c extra3.h</kbd>
+<kbd is="sh">1521 autotest mips part1 extra1.c extra2.c extra3.h</kbd>
 ...
 </pre>
 
@@ -114,7 +114,7 @@ which implements the instruction.
 
 <div class="highlight"><pre><span></span><span class="c1">// If you use C library functions add includes here.</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;emu.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;mips.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;ram.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;registers.h&quot;</span><span class="cp"></span>
 
@@ -160,7 +160,7 @@ You implement instructions by appropriately calling the functions
 <code>execute_instruction</code> must also update the program counter.
 
 <p>
-<strong>emu</strong> has a <code>-e</code> option,
+<strong>mips</strong> has a <code>-e</code> option,
 will also accept assembler statements,
 convert them to integers,
 and calls <em>execute_instruction</em> for each integer,
@@ -168,7 +168,7 @@ then print the value of registers.
 For example:
 
 <pre is="tty">
-<kbd is="sh">./emu -e 'add $4, $14, $12'</kbd>
+<kbd is="sh">./mips -e 'add $4, $14, $12'</kbd>
 R0  [$zero] = 00000000
 R1  [$at] = 00000000
 R2  [$v0] = 00000000
@@ -204,29 +204,29 @@ R31 [$ra] = 00400018
 </pre>
 
 <p>
-Note that <strong>emu</strong> sets registers 9 to 16
+Note that <strong>mips</strong> sets registers 9 to 16
 to the values 1 through 7 before execution
 to have convenient values available for testing single instructions.
 
 <p>
-<strong>emu</strong> also has a <code>-E</code> option,
+<strong>mips</strong> also has a <code>-E</code> option,
 which like <code>-P</code> takes a file of assembler statements,
 converts them to integers,
 and calls <em>execute_instruction</em> multiple times to execute them.
 For example:
 
 <pre is="tty">
-<kbd is="sh">./emu -E sum_100_squares.s</kbd>
+<kbd is="sh">./mips -E sum_100_squares.s</kbd>
 338350
 </pre>
 
 <p>
-<strong>emu</strong> can also be run interactively:
+<strong>mips</strong> can also be run interactively:
 
 <pre is="tty">
-<kbd is="sh">./emu add_memory.s</kbd>
+<kbd is="sh">./mips add_memory.s</kbd>
 PC = [00400024] 34080011 ori $8, $0, 17
-emu > <kbd>h</kbd>
+mips > <kbd>h</kbd>
 In interactive mode, available commands are:
     s       step (execute one instruction)
     r       execute all remaining instructions
@@ -239,7 +239,7 @@ In interactive mode, available commands are:
     T       print Text segment
 Entering nothing will re-send the previous command.
 
-emu > <kbd>R</kbd>
+mips > <kbd>R</kbd>
 R0  [$zero] = 00000000
 R1  [$at] = 00000000
 R2  [$v0] = 00000000
@@ -273,11 +273,11 @@ R29 [$sp] = 7FFFF8E4
 R30 [$fp] = 00000000
 R31 [$ra] = 00400018
 PC = [00400024] 34080011 ori $8, $0, 17
-emu > <kbd>s</kbd>
+mips > <kbd>s</kbd>
 PC = [00400028] 3C011001 lui $1, 4097
-emu > <kbd>s</kbd>
+mips > <kbd>s</kbd>
 PC = [0040002C] AC280000 sw $8, 0($1)
-emu > <kbd>D</kbd>
+mips > <kbd>D</kbd>
 [10000000..1000FFFC] 00000000
 [10010000] 00000011
 [10010004] 00000019
@@ -291,7 +291,7 @@ In addition, autotests are available
 to help with your testing:
 
 <pre is="tty">
-<kbd is="sh">1521 autotest emu part2</kbd>
+<kbd is="sh">1521 autotest mips part2</kbd>
 ...
 </pre>
 
@@ -301,7 +301,7 @@ if you create extra <code>.c</code> or <code>.h</code> files,
 you will need to supply them explicitly to autotest; for example:
 
 <pre is="tty">
-<kbd is="sh">1521 autotest emu part2 extra1.c extra2.c extra3.h</kbd>
+<kbd is="sh">1521 autotest mips part2 extra1.c extra2.c extra3.h</kbd>
 ...
 </pre>
 
@@ -310,7 +310,7 @@ you will need to supply them explicitly to autotest; for example:
 <p>
 You only need to implement the following subset of
 instructions and system calls;
-<strong>emu</strong> will only be tested on these.
+<strong>mips</strong> will only be tested on these.
 
 <h3>MIPS Instructions</h3>
 <p>
