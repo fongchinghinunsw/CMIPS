@@ -1,3 +1,6 @@
+# CMIPS
+[![CMIPS](https://img.shields.io/badge/GitHub-CMIPS-blue)](https://github.com/fongchinghinunsw/CMIPS)
+
 <p>
 The first part of the assignment is
 to implement the function <code>print_instruction</code>
