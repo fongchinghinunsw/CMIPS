@@ -2,10 +2,6 @@
 [![CMIPS](https://img.shields.io/badge/GitHub-CMIPS-blue)](https://github.com/fongchinghinunsw/CMIPS)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
-<p>
-Tables below describe how MIPS instructions are encoded.
-
 <p>
 <strong>CMIPS</strong> takes several command-line arguments.
 The <code>-p</code> option indicates the rest of the command is
@@ -185,6 +181,9 @@ mips > <kbd>D</kbd>
 
 <h2>MIPS Architecture</h2>
 <h3>MIPS Instructions</h3>
+
+<p>
+Tables below describe how MIPS instructions are encoded.
 
 <table class="table table-sm table-striped">
 <thead>
